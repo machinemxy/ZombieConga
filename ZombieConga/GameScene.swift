@@ -15,6 +15,22 @@ class GameScene: SKScene {
     var dt: TimeInterval = 0
     let zombieMovePointsPerSec: CGFloat = 480.0
     var velocity = CGPoint.zero
+    let playableRect: CGRect
+    var lastTouchLocation: CGPoint?
+    let zombieRotateRadiansPerSec: CGFloat = 4.0 * π
+    
+    override init(size: CGSize) {
+        let maxAspectRatio: CGFloat = 16.0 / 9.0
+        let playableHeight = size.width / maxAspectRatio
+        let playableMargin = (size.height - playableHeight) / 2.0
+        playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)
+        
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.black
@@ -34,6 +50,9 @@ class GameScene: SKScene {
         //gesture recognize
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tapRecognizer)
+        
+        //draw playable area
+        debugDrawPlayableArea()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -44,23 +63,45 @@ class GameScene: SKScene {
         }
         lastUpdateTime = currentTime
         
-        move(sprite: zombie, velocity: velocity)
+        if velocity != CGPoint.zero {
+            if let lastTouchLocation = lastTouchLocation {
+                rotate(sprite: zombie, direction: velocity, rotateRadiansPerSec: zombieRotateRadiansPerSec)
+                
+                let pace = (velocity * CGFloat(dt)).length()
+                let restDistance = (lastTouchLocation - zombie.position).length()
+                if restDistance <= pace {
+                    zombie.position = lastTouchLocation
+                    velocity = CGPoint.zero
+                } else {
+                    move(sprite: zombie, velocity: velocity)
+                }
+            }
+        }
         boundsCheckZombie()
     }
     
     func move(sprite: SKSpriteNode, velocity: CGPoint) {
-        let amoutToMove = CGPoint(x: velocity.x * CGFloat(dt), y: velocity.y * CGFloat(dt))
-        sprite.position = CGPoint(x: sprite.position.x + amoutToMove.x, y: sprite.position.y + amoutToMove.y)
+        let amoutToMove = velocity * CGFloat(dt)
+        sprite.position += amoutToMove
     }
     
     func moveZombieToward(location: CGPoint) {
-        let offset = CGPoint(x: location.x - zombie.position.x, y: location.y - zombie.position.y)
-        let length = sqrt(Double(offset.x * offset.x + offset.y * offset.y))
-        let direction = CGPoint(x: offset.x / CGFloat(length), y: offset.y / CGFloat(length))
-        velocity = CGPoint(x: direction.x * zombieMovePointsPerSec, y: direction.y * zombieMovePointsPerSec)
+        let offset = location - zombie.position
+        let length = offset.length()
+        if length == 0 {
+            velocity = CGPoint.zero
+            return
+        }
+        let direction = offset.normalized()
+        velocity = direction * zombieMovePointsPerSec
     }
     
     func sceneTouched(touchLocation: CGPoint) {
+        //the touch outside the playableRect is 無効
+        if !playableRect.contains(touchLocation) {
+            return
+        }
+        lastTouchLocation = touchLocation
         moveZombieToward(location: touchLocation)
     }
     
@@ -87,8 +128,8 @@ class GameScene: SKScene {
     }
     
     func boundsCheckZombie() {
-        let bottomLeft = CGPoint.zero
-        let topRight = CGPoint(x: size.width, y: size.height)
+        let bottomLeft = CGPoint(x: playableRect.minX, y: playableRect.minY)
+        let topRight = CGPoint(x: playableRect.maxX, y: playableRect.maxY)
         
         if zombie.position.x <= bottomLeft.x {
             zombie.position.x = bottomLeft.x
@@ -108,6 +149,26 @@ class GameScene: SKScene {
         if zombie.position.y >= topRight.y {
             zombie.position.y = topRight.y
             velocity.y = -velocity.y
+        }
+    }
+    
+    func debugDrawPlayableArea() {
+        let shape = SKShapeNode()
+        let path = CGMutablePath()
+        path.addRect(playableRect)
+        shape.path = path
+        shape.strokeColor = SKColor.red
+        shape.lineWidth = 4.0
+        addChild(shape)
+    }
+    
+    func rotate(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
+        let shortest = shortestAngleBetween(angle1: sprite.zRotation, angle2: direction.angle)
+        let amountToRotate = rotateRadiansPerSec * CGFloat(dt)
+        if abs(shortest) <= amountToRotate {
+            sprite.zRotation = direction.angle
+        } else {
+            sprite.zRotation += shortest.sign() * amountToRotate
         }
     }
 }

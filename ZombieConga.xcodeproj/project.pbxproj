@@ -13,6 +13,7 @@
 		228FCF512108BD0800EA004D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228FCF4F2108BD0800EA004D /* Main.storyboard */; };
 		228FCF532108BD0900EA004D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228FCF522108BD0900EA004D /* Assets.xcassets */; };
 		228FCF562108BD0900EA004D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228FCF542108BD0900EA004D /* LaunchScreen.storyboard */; };
+		22EA0197211095D9000078B6 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EA0196211095D9000078B6 /* MyUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		228FCF522108BD0900EA004D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		228FCF552108BD0900EA004D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		228FCF572108BD0900EA004D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22EA0196211095D9000078B6 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		228FCF442108BD0800EA004D /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				22EA0196211095D9000078B6 /* MyUtils.swift */,
 				228FCF452108BD0800EA004D /* AppDelegate.swift */,
 				228FCF4B2108BD0800EA004D /* GameScene.swift */,
 				228FCF4D2108BD0800EA004D /* GameViewController.swift */,
@@ -141,6 +144,7 @@
 				228FCF4C2108BD0800EA004D /* GameScene.swift in Sources */,
 				228FCF4E2108BD0800EA004D /* GameViewController.swift in Sources */,
 				228FCF462108BD0800EA004D /* AppDelegate.swift in Sources */,
+				22EA0197211095D9000078B6 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
