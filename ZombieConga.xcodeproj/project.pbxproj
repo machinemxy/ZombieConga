@@ -13,6 +13,7 @@
 		2238F4E6211584600055D7D9 /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2238F4E1211584600055D7D9 /* hitCatLady.wav */; };
 		2238F4E7211584600055D7D9 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2238F4E2211584600055D7D9 /* backgroundMusic.mp3 */; };
 		224E067F211C5CA400E3F1A7 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224E067E211C5CA400E3F1A7 /* GameOverScene.swift */; };
+		224E0681211C745D00E3F1A7 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224E0680211C745D00E3F1A7 /* MainMenuScene.swift */; };
 		228FCF462108BD0800EA004D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228FCF452108BD0800EA004D /* AppDelegate.swift */; };
 		228FCF4C2108BD0800EA004D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228FCF4B2108BD0800EA004D /* GameScene.swift */; };
 		228FCF4E2108BD0800EA004D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228FCF4D2108BD0800EA004D /* GameViewController.swift */; };
@@ -29,6 +30,7 @@
 		2238F4E1211584600055D7D9 /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
 		2238F4E2211584600055D7D9 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 		224E067E211C5CA400E3F1A7 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		224E0680211C745D00E3F1A7 /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		228FCF422108BD0800EA004D /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228FCF452108BD0800EA004D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228FCF4B2108BD0800EA004D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				2238F4DD211584600055D7D9 /* Sounds */,
 				22EA0196211095D9000078B6 /* MyUtils.swift */,
 				228FCF452108BD0800EA004D /* AppDelegate.swift */,
+				224E0680211C745D00E3F1A7 /* MainMenuScene.swift */,
 				228FCF4B2108BD0800EA004D /* GameScene.swift */,
 				224E067E211C5CA400E3F1A7 /* GameOverScene.swift */,
 				228FCF4D2108BD0800EA004D /* GameViewController.swift */,
@@ -172,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224E0681211C745D00E3F1A7 /* MainMenuScene.swift in Sources */,
 				224E067F211C5CA400E3F1A7 /* GameOverScene.swift in Sources */,
 				228FCF4C2108BD0800EA004D /* GameScene.swift in Sources */,
 				228FCF4E2108BD0800EA004D /* GameViewController.swift in Sources */,
