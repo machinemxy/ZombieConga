@@ -26,6 +26,10 @@ class GameScene: SKScene {
     var lives = 5
     var gameOver = false
     
+    //sound
+    let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
+    let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
+    
     //camera
     let cameraNode = SKCameraNode()
     let cameraMovePointsPerSec: CGFloat = 200.0
@@ -35,9 +39,9 @@ class GameScene: SKScene {
         return CGRect(x: x, y: y, width: playableRect.width, height: playableRect.height)
     }
     
-    //sound
-    let catCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
-    let enemyCollisionSound: SKAction = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
+    //label
+    let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+    let catsLabel = SKLabelNode(fontNamed: "Glimstick")
     
     override init(size: CGSize) {
         let maxAspectRatio: CGFloat = 16.0 / 9.0
@@ -103,6 +107,24 @@ class GameScene: SKScene {
         addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        
+        //add livesLabel
+        livesLabel.fontColor = SKColor.black
+        livesLabel.fontSize = 100
+        livesLabel.zPosition = 150
+        livesLabel.verticalAlignmentMode = .bottom
+        livesLabel.horizontalAlignmentMode = .left
+        livesLabel.position = CGPoint(x: -playableRect.size.width/2 + CGFloat(20), y: -playableRect.size.height/2 + CGFloat(20))
+        cameraNode.addChild(livesLabel)
+        
+        //add catsLabel
+        catsLabel.fontColor = SKColor.black
+        catsLabel.fontSize = 100
+        catsLabel.zPosition = 150
+        catsLabel.verticalAlignmentMode = .bottom
+        catsLabel.horizontalAlignmentMode = .right
+        catsLabel.position = CGPoint(x: playableRect.size.width/2 - CGFloat(20), y: -playableRect.size.height/2 + CGFloat(20))
+        cameraNode.addChild(catsLabel)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -136,6 +158,8 @@ class GameScene: SKScene {
         moveTrain()
         
         moveCamera()
+        
+        livesLabel.text = "Lives: \(lives)"
         
         if lives <= 0 && !gameOver {
             gameOver = true
@@ -375,6 +399,8 @@ class GameScene: SKScene {
             }
             targetPosition = node.position
         }
+        
+        catsLabel.text = "Cats: \(trainCount)"
         
         if trainCount >= 10 && !gameOver {
             gameOver = true
